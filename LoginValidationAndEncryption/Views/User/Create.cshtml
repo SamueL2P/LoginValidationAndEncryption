@@ -1,0 +1,103 @@
+﻿@model LoginValidationAndEncryption.Models.User
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create Account</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'PT Sans', sans-serif;
+            background-image: url('@Url.Content("~/Content/mountain.jpg")');
+            background-size: cover;
+            background-position: center;
+        }
+        #UserName {
+            margin-top: 0.3rem;
+            width: 19rem;
+            border-radius: 0.2rem;
+            height: 2rem;
+        }
+
+        #Password {
+            margin-top: 0.3rem;
+            width: 19rem;
+            border-radius: 0.2rem;
+            height: 2rem;
+        }
+        input:focus {
+            border: 1px solid #1670BE;
+            box-shadow: 0 0 3px #1670BE;
+            outline-offset: 0px;
+            outline: none;
+        }
+        .input-field {
+            margin-top: 0.3rem;
+            width: 100%; /* Full width of the container */
+            border-radius: 0.2rem;
+            height: 2rem;
+        }
+        .submit-button {
+            background-color: white;
+            width: 100%;
+            border-radius: 0.25rem; /* rounded-md */
+            height: 2.5rem;
+            margin-top: 1.5rem;
+        }
+        .link-container {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .link-container a {
+            color: #ffffff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container  h-[28rem] w-[24rem]  bg-gray-400 m-24 ml-auto mr-auto rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-200">
+        <h2 class="text-center text-4xl text-white font-bold mt-2 mb-4">Create Account</h2>
+
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="error-message text-center mb-4 border border-red-400 text-gray-700 p-2 bg-red-100">
+                @ViewBag.ErrorMessage
+            </div>
+        }
+
+
+        @using (Html.BeginForm("Create", "User", FormMethod.Post))
+        {
+            <div class="m-10  mt-7 w-40">
+                    <div>
+                        <label class="text-xl text-white font-bold">Username</label>
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "input-field bg-white px-2", placeholder = "Enter username" })
+                    </div>
+
+                    <div class="mt-4">
+                        <label class="text-xl text-white font-bold">Password</label>
+                        @Html.PasswordFor(m => m.Password, new { @class = "input-field bg-white px-2", placeholder = "Enter password" })
+                    </div>
+
+                    <div class="mt-6">
+                        <input type="submit" value="Create Account" class="submit-button font-bold ml-16" />
+                    </div>
+                </div>
+                    }
+
+                    <div class="link-container">
+                        <p class="text-white">Already a user?</p>
+                        @Html.ActionLink("Login here", "Login", null, new { @class = "text-white font-extrabold" })
+                    </div>
+                </div>
+</body>
+</html>
